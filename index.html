@@ -35,14 +35,6 @@
         margin-top: 30px;
       }
 
-      .photo-frame {
-        background-color: white;
-        margin: 15px 20px;
-        height: 200px;
-        background-size: cover;
-        position: relative;
-      }
-
       /* 하단 영역 스타일링 */
       .footer {
         display: flex;
@@ -77,43 +69,115 @@
         background-image: url("./img4.jpeg");
       }
 
-      .photo-description {
-        color: white;
-        background-color: black;
-        width: fit-content;
-        padding: 0 20px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        position: absolute;
-        bottom: 0;
-        transform: translate(-50%);
-        left: 50%;
-      }
+      .photo-frame {
+	background-color: white;
+	margin: 15px 20px;
+	height: 200px;
+	background-size: cover;
+	position: relative;
+	cursor: pointer; 
+}
+
+.photo-description {
+	color: white;
+	background-color: black;
+	width: fit-content;
+	padding: 0 20px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	position: absolute;
+	bottom: 0;
+	transform: translate(-50%);
+	left: 50%;
+	opacity: 0; //초반에 페이지 열릴 때 기본으로 안보이게 하기 위한 설정이에요
+}
 
 	 .video {
         width: 100%;
         height: 100%;
       }
+      /* opacity : 투명도를 의미해요! 0% 투명하다. 즉 다 보인다. */
+    .showText {
+	    opacity: 0;
+    }
+
+
+.hideText {
+	opacity: 1;
+  transition: opacity 0.5s linear;
+}
     </style>
+
+<script>
+function showText(number) {
+    if (number === 1) {
+      document.querySelector("#desc1").classList.remove("hideText");
+      document.querySelector("#desc1").classList.add("showText");
+    } else if (number === 2) {
+      document.querySelector("#desc2").classList.remove("hideText");
+      document.querySelector("#desc2").classList.add("showText");
+    } else {
+      document.querySelector("#desc3").classList.remove("hideText");
+      document.querySelector("#desc3").classList.add("showText");
+    }
+  }
+
+  function hideText(number) {
+    if (number === 1) {
+      document.querySelector("#desc1").classList.remove("showText");
+      document.querySelector("#desc1").classList.add("hideText");
+    } else if (number === 2) {
+      document.querySelector("#desc2").classList.remove("showText");
+      document.querySelector("#desc2").classList.add("hideText");
+    } else {
+      document.querySelector("#desc3").classList.remove("showText");
+      document.querySelector("#desc3").classList.add("hideText");
+    }
+  }
+  
+  // 클릭 기능
+  // 1. 선택된 사진의 숫자를 가진 텍스트를 alert 형태로 출력해줌
+  function alertText(number) {
+      alert(`${number}번째 추억이에요! 눌러주셔서 감사합니다 :)`);
+  }
+
+</script> 
   </head>
   <body>
     <div class="container">
       <div class="photos">
-        <div id="image1" class="photo-frame">
-          <span id="desc1" class="photo-description">
-            김앵무
-          </span>
-        </div>
-        <div id="image2" class="photo-frame">
-          <span id="desc2" class="photo-description">
+        <div
+        id="image1"
+        class="photo-frame"
+        onmouseover="hideText(1)"
+        onmouseout="showText(1)"
+        onclick="alertText(1)"
+    >
+        <span id="desc1" class="photo-description">
+            김앵무와
+        </span>
+    </div>
+    <div
+        id="image2" class="photo-frame"
+        onmouseover="hideText(2)"
+        onmouseout="showText(2)"
+        onclick="alertText(2)"
+    >
+        <span id="desc2" class="photo-description">
             이앵무의
-          </span>
-        </div>
-        <div id="image3" class="photo-frame">
-          <span id="desc3" class="photo-description">
-            앵생네컷
-          </span>
-        </div>
+        </span>
+    </div>
+    <div
+        id="image3"
+        class="photo-frame"
+        onmouseover="hideText(3)"
+        onmouseout="showText(3)"
+        onclick="alertText(3)"
+    >
+        <span id="desc3" class="photo-description">
+        앵생네컷
+    </span>
+    </div>
         <div class="photo-frame">
             <iframe  height="200" src="https://www.youtube.com/embed/mHnJS1fwysA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
